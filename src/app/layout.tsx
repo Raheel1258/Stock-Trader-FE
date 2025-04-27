@@ -18,7 +18,7 @@ export default async function RootLayout({
         <Theme accentColor="grass">
           <QueryProvider>
             <Toaster position="top-right" />
-            <Flex direction="column" className="h-screen">
+            <Flex direction="column" className="h-screen bg-light-gray">
               {auth ? <Navbar /> : null}
               {children}
             </Flex>

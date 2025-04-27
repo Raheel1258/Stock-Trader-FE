@@ -15,6 +15,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-light-gray: rgba(249, 250, 251, 255);
+  --color-white: #FFF;
+  --color-gray-1: #d1d5db;
 }
 
 @media (prefers-color-scheme: dark) {
