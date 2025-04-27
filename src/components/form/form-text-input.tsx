@@ -1,19 +1,25 @@
 import { TextField } from "@radix-ui/themes";
-import { ComponentProps, useState } from "react";
+import { Field, FieldProps } from "formik";
+import { ComponentProps } from "react";
 
-const FormTextInput = ({
-  className,
-  ...props
-}: ComponentProps<typeof TextField.Root>) => {
-  const [input, setInput] = useState<string>("");
+interface FormTextInputProps extends ComponentProps<typeof TextField.Root> {
+  name: string;
+  renderSlot?: () => React.ReactNode;
+}
 
+const FormTextInput = ({ name, renderSlot, ...props }: FormTextInputProps) => {
   return (
-    <TextField.Root
-      {...props}
-      className={className}
-      value={input}
-      onChange={(e) => setInput(e.target.value)}
-    />
+    <Field name={name}>
+      {({ field }: FieldProps) =>
+        renderSlot ? (
+          <TextField.Root {...field} {...props}>
+            {renderSlot()}
+          </TextField.Root>
+        ) : (
+          <TextField.Root {...field} {...props} />
+        )
+      }
+    </Field>
   );
 };
 

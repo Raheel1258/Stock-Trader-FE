@@ -1,13 +1,24 @@
 "use client";
 
 import { register } from "@/lib/firebase/auth";
-import { Box, Button, Text, TextField } from "@radix-ui/themes";
+import { Button, Flex, Text } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
-import { FormEvent, useState } from "react";
+import { Form, Formik } from "formik";
+import { validationSchema } from "./validation";
+import { EmailInputField, PasswordInputField } from "./components";
+
+interface InitValues {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+const initValues: InitValues = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const RegistrationPage = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const { mutate, isError } = useMutation({
     mutationFn: (data: { email: string; password: string }) =>
       register(data.email, data.password),
@@ -17,28 +28,27 @@ const RegistrationPage = () => {
     },
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (values: InitValues) => {
+    const { email, password } = values;
     mutate({ email, password });
   };
 
   return (
-    <Box>
-      <form onSubmit={handleSubmit}>
-        <TextField.Root
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField.Root
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button>Submit</Button>
-        {isError && <Text>Failed to register</Text>}
-      </form>
-    </Box>
+    <Flex className="justify-center items-center h-screen">
+      <Formik
+        initialValues={initValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form className="flex flex-col gap-y-[20px] h-[500px] min-w-[50%] justify-center">
+          <EmailInputField name="email" />
+          <PasswordInputField name="password" />
+          <PasswordInputField name="confirmPassword" />
+          <Button className="w-[100px]">Submit</Button>
+          {isError && <Text color="tomato">Failed to register</Text>}
+        </Form>
+      </Formik>
+    </Flex>
   );
 };
 
