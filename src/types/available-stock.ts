@@ -4,4 +4,15 @@ interface AvailableStock {
   websocketSymbol: string;
 }
 
-export type { AvailableStock }
+interface StockData {
+  id: string;
+  date: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  symbol: string;
+}
+
+export type { AvailableStock, StockData };

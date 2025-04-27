@@ -4,4 +4,6 @@ const BASE_URL = API_URL
 
 const GET_AVAILABLE_SYMBOLS = `${BASE_URL}/api/v1/user/getAvailableGroupSymbols`
 
-export { GET_AVAILABLE_SYMBOLS }
+const SEARCH_STOCKS_DATA = `${BASE_URL}/api/v1/stock/fetchHistoricalData` 
+
+export { GET_AVAILABLE_SYMBOLS, SEARCH_STOCKS_DATA }

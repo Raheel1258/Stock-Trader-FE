@@ -5,6 +5,7 @@ const Navbar = () => {
   return (
     <Flex
       justify="between"
+      align='center'
       py="4"
       px="8"
       className="bg-white border-b border-gray-1"
