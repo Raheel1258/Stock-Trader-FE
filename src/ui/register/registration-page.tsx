@@ -1,6 +1,6 @@
 "use client";
 
-import { register } from "@/lib/firebase/auth";
+import { register } from "@/lib/firebase";
 import { Button, Flex, Heading, Spinner, Text } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";

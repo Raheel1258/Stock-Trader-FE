@@ -1,3 +1,6 @@
+// APP KEYS
+const API_URL = process.env.API_URL ?? '';
+
 // Firebase configs
 const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
@@ -22,4 +25,5 @@ export {
   FIREBASE_MEASUREMENT_ID,
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APP_ID,
+  API_URL,
 };
