@@ -16,7 +16,7 @@ const getAuthCookies = async () => {
 
 const clearAuthCookies = async () => {
   const cookiesStore = await cookies();
-  return cookiesStore.delete("auth");
+  cookiesStore.delete("auth");
 };
 
 export { setAuthCookies, getAuthCookies, clearAuthCookies };

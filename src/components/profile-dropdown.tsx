@@ -4,6 +4,7 @@ import { clearAuthCookies } from "@/actions";
 import { logout } from "@/lib/firebase";
 import { Avatar, DropdownMenu, Flex } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
+import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const ProfileDropdown = () => {
@@ -18,9 +19,9 @@ const ProfileDropdown = () => {
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
+      <DropdownMenu.Trigger className="cursor-pointer">
         <Flex align="center" gapX="1">
-          <Avatar fallback={"A"} radius="full" />
+          <Avatar fallback={<User />} radius="full" />
           <DropdownMenu.TriggerIcon />
         </Flex>
       </DropdownMenu.Trigger>

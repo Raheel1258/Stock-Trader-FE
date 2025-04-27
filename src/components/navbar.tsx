@@ -5,13 +5,15 @@ const Navbar = () => {
   return (
     <Flex
       justify="between"
-      align='center'
+      align="center"
       py="4"
       px="8"
       className="bg-white border-b border-gray-1"
       mb="8"
     >
-      <Text>Stocks</Text>
+      <Text weight={"medium"} size="6">
+        Index Track
+      </Text>
       <ProfileDropdown />
     </Flex>
   );

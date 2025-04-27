@@ -18,7 +18,7 @@ const StockIndexCard = ({
   return (
     <Flex
       minWidth={"400px"}
-      className="[box-shadow:1_1_6_1_#d1d5db] bg-white rounded-[8px] hover:cursor-pointer"
+      className="[box-shadow:1_1_6_1_#d1d5db] bg-white rounded-[8px] hover:cursor-pointer hover:[box-shadow:2_4_3_1_#d1d5db]"
       p="4"
       onClick={onCardSelect}
     >
