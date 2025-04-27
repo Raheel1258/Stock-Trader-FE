@@ -1,6 +1,6 @@
 "use client";
 
-import { register } from "@/lib/firebase/auth";
+import { login } from "@/lib/firebase";
 import { Button, Flex, Heading, Spinner, Text } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
@@ -8,6 +8,7 @@ import { EmailInputField } from "./components";
 import { setAuthCookies } from "@/actions";
 import { PasswordInputField } from "@/components/form";
 import { validationSchema } from "./validtion";
+import { useRouter } from "next/navigation";
 
 interface InitValues {
   email: string;
@@ -21,12 +22,14 @@ const initValues: InitValues = {
 };
 
 const LoginPage = () => {
+  const router = useRouter();
   const { mutate, isError, isPending } = useMutation({
     mutationFn: (data: { email: string; password: string }) =>
-      register(data.email, data.password),
+      login(data.email, data.password),
     onSuccess: (data) => {
-      data.user.getIdToken().then((token) => {
-        setAuthCookies(token);
+      data.user.getIdToken().then(async (token) => {
+        await setAuthCookies(token);
+        router.push("/");
       });
     },
   });
