@@ -1,13 +1,11 @@
-import {
-  FormFieldContainer,
-  FormFieldLabel,
-  FormTextInput,
-} from "@/components/form";
-import { FormFieldError } from "@/components/form/form-field-error";
 import { IconButton, TextField } from "@radix-ui/themes";
 import { ErrorMessage } from "formik";
 import { EyeIcon, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { FormFieldError } from "./form-field-error";
+import { FormFieldContainer } from "./form-field-container";
+import { FormFieldLabel } from "./form-field-label";
+import { FormTextInput } from "./form-text-input";
 
 const PasswordShowHideSlot = ({
   type,

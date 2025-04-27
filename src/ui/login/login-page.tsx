@@ -4,11 +4,10 @@ import { register } from "@/lib/firebase/auth";
 import { Button, Flex, Heading, Spinner, Text } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
-import { validationSchema } from "./validation";
 import { EmailInputField } from "./components";
+import { setAuthCookies } from "@/actions";
 import { PasswordInputField } from "@/components/form";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { validationSchema } from "./validtion";
 
 interface InitValues {
   email: string;
@@ -21,14 +20,14 @@ const initValues: InitValues = {
   confirmPassword: "",
 };
 
-const RegistrationPage = () => {
-  const router = useRouter();
+const LoginPage = () => {
   const { mutate, isError, isPending } = useMutation({
     mutationFn: (data: { email: string; password: string }) =>
       register(data.email, data.password),
-    onSuccess: () => {
-      toast.success("Successfully registered");
-      router.push("/login");
+    onSuccess: (data) => {
+      data.user.getIdToken().then((token) => {
+        setAuthCookies(token);
+      });
     },
   });
 
@@ -45,18 +44,17 @@ const RegistrationPage = () => {
         validationSchema={validationSchema}
       >
         <Form className="flex flex-col gap-y-[20px] h-[500px] min-w-[50%] justify-center">
-          <Heading>Register yourself</Heading>
+          <Heading>Login</Heading>
           <EmailInputField name="email" />
           <PasswordInputField name="password" />
-          <PasswordInputField name="confirmPassword" />
           <Button className="w-[100px]">
             Submit {isPending && <Spinner />}
           </Button>
-          {isError && <Text color="tomato">Failed to register</Text>}
+          {isError && <Text color="tomato">Failed to Login</Text>}
         </Form>
       </Formik>
     </Flex>
   );
 };
 
-export { RegistrationPage };
+export { LoginPage };
