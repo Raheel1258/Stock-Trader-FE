@@ -3,15 +3,14 @@
 import { Tabs } from "@radix-ui/themes";
 import { AlertForm } from "./new-alert-tab";
 import { ViewAlert } from "./view-alert-tab";
-
-enum TabValue {
-  ViewAlert = "view-alerts",
-  NewAlerts = "new-alert",
-}
+import { useState } from "react";
+import { TabValue } from "./new-alert-tab/types";
 
 const AlertTab = () => {
+  const [activeTab, setActiveTab] = useState<string>(TabValue.ViewAlert);
+
   return (
-    <Tabs.Root defaultValue={TabValue.ViewAlert}>
+    <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
       <Tabs.List>
         <Tabs.Trigger value={TabValue.ViewAlert}>Your alerts</Tabs.Trigger>
         <Tabs.Trigger value={TabValue.NewAlerts}>
@@ -22,7 +21,7 @@ const AlertTab = () => {
         <ViewAlert />
       </Tabs.Content>
       <Tabs.Content value={TabValue.NewAlerts}>
-        <AlertForm />
+        <AlertForm setActiveTab={setActiveTab} />
       </Tabs.Content>
     </Tabs.Root>
   );

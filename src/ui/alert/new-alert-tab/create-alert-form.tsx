@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { validationSchema } from "./validation";
-import { InitialValues } from "./types";
+import { InitialValues, TabValue } from "./types";
 import { SymbolSelectField } from "./symbol-select";
 import { ThresholdInput } from "./threshold-input";
 import { useMutation } from "@tanstack/react-query";
@@ -13,15 +13,20 @@ const initialValues: InitialValues = {
   threshold: "",
 };
 
-const AlertForm = () => {
+const AlertForm = ({
+  setActiveTab,
+}: {
+  setActiveTab: (value: string) => void;
+}) => {
   const { mutate } = useMutation({
     mutationFn: ({ symbol, threshold }: InitialValues) =>
       api.POST(api.CREATE_ALERT, {
-        symbol,
-        threshold,
+        symbolId: symbol,
+        targetPrice: threshold,
       }),
     onSuccess: () => {
       toast.success("Alert created successfully");
+      setActiveTab(TabValue.ViewAlert);
     },
   });
   const onSubmit = (values: InitialValues) => {
