@@ -27,7 +27,7 @@ const StockIndexView = () => {
 
   return (
     <Flex px="4" gap="4" direction='column' flexGrow='1'>
-      <Flex justify='center' gapX="8">
+      <Flex justify='center' gapY='4' gapX="8" wrap='wrap'>
         {data?.map((availableStock) => (
           <StockIndexCard
             key={availableStock._id}

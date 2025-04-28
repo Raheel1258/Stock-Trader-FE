@@ -9,6 +9,7 @@ import { setAuthCookies } from "@/actions";
 import { PasswordInputField } from "@/components/form";
 import { validationSchema } from "./validtion";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface InitValues {
   email: string;
@@ -54,6 +55,7 @@ const LoginPage = () => {
             Submit {isPending && <Spinner />}
           </Button>
           {isError && <Text color="tomato">Failed to Login</Text>}
+          <Link href='/register' className='text-green-1'>Register</Link>
         </Form>
       </Formik>
     </Flex>
