@@ -15,7 +15,7 @@ export const middleware = async (request: NextRequest) => {
         body: request.body,
         method: request.method,
         headers: {
-          Authorization: auth ? `Bearer ${auth}` : "",
+          Authorization: headers.get('Authorization')?? '',
           "Content-Type": headers.get("Content-Type") ?? "application/json",
         },
       }
