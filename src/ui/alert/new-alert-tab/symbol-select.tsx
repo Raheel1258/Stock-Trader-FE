@@ -1,4 +1,4 @@
-import { AvailableStock } from "@/types";
+import { AvailableStockResponse } from "@/types";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import * as api from "@/lib/api";
@@ -13,13 +13,13 @@ interface SelectOptions {
 }
 
 const SymbolSelect = ({ field }: { field: string }) => {
-  const { data } = useQuery<AvailableStock[], unknown, SelectOptions[]>({
+  const { data } = useQuery<AvailableStockResponse, unknown, SelectOptions[]>({
     queryKey: ["available-symbols"],
-    queryFn: () => api.GET<AvailableStock[]>(api.GET_AVAILABLE_SYMBOLS),
+    queryFn: () => api.GET<AvailableStockResponse>(api.GET_AVAILABLE_SYMBOLS),
     select: (data) =>
-      data.map((stock) => ({
+      data.response.map((stock) => ({
         label: stock.symbol,
-        value: stock._id,
+        value: stock.symbolId,
       })),
   });
   const { setFieldValue, values } = useFormikContext<InitialValues>();

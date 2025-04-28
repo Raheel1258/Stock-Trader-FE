@@ -1,7 +1,17 @@
 interface AvailableStock {
-  _id: string;
+  symbolId: string;
   symbol: string;
   websocketSymbol: string;
+  close: number;
+  current: number;
+  date: string;
+  group: string;
+  high: number;
+  low: number;
+  open: number;
+  percentage: number;
+  previousClose: number;
+  priceChangePrevious: number;
 }
 
 interface StockData {
@@ -28,9 +38,15 @@ interface StockDataResponse {
   };
 }
 
+interface AvailableStockResponse {
+  success: boolean;
+  response: AvailableStock[];
+}
+
 export type {
   AvailableStock,
   StockData,
   TransformedStockData,
   StockDataResponse,
+  AvailableStockResponse,
 };

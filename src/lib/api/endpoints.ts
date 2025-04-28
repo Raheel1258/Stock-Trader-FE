@@ -6,7 +6,7 @@ const GET_AVAILABLE_SYMBOLS = `${BASE_URL}/api/v1/user/getAvailableGroupSymbols`
 
 const SEARCH_STOCKS_DATA = `${BASE_URL}/api/v1/stock/fetchHistoricalData`;
 
-const CREATE_ALERT = `${BASE_URL}/api/v1/updateUserPreference`;
+const CREATE_ALERT = `${BASE_URL}/api/v1/user/updateUserPreference`;
 
 const GET_USER_ALERTS = `${BASE_URL}/api/v1/user/getUserPreference`;
 

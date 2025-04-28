@@ -1,4 +1,5 @@
 interface UserAlert {
+  _id: string;
   userId: string;
   symbolId: string;
   symbol: string;
@@ -6,4 +7,9 @@ interface UserAlert {
   targetPrice: number;
 }
 
-export type { UserAlert };
+interface UserAlertResponse {
+  message: string;
+  response: UserAlert;
+}
+
+export type { UserAlert, UserAlertResponse };

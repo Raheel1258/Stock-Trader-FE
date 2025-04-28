@@ -1,7 +1,7 @@
 "use client";
 
 import * as api from "@/lib/api";
-import { AvailableStock } from "@/types";
+import { AvailableStock, AvailableStockResponse } from "@/types";
 import { Flex, Text } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import { StockIndexCard } from "./stock-index-card";
@@ -11,7 +11,7 @@ import { useState } from "react";
 const StockIndexView = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["available-symbols"],
-    queryFn: () => api.GET<AvailableStock[]>(api.GET_AVAILABLE_SYMBOLS),
+    queryFn: () => api.GET<AvailableStockResponse>(api.GET_AVAILABLE_SYMBOLS),
   });
   const [currentSymbol, setCurrentSymbol] = useState<
     AvailableStock | undefined
@@ -28,18 +28,18 @@ const StockIndexView = () => {
   return (
     <Flex px="4" gap="4" direction="column" flexGrow="1">
       <Flex justify="center" gapY="4" gapX="8" wrap="wrap">
-        {data?.map((availableStock) => (
+        {data?.response.map((availableStock) => (
           <StockIndexCard
-            key={availableStock._id}
+            key={availableStock.symbolId}
             availableStock={availableStock}
             onSelect={setCurrentSymbol}
           />
         )) ?? <Text>No stocks found</Text>}
       </Flex>
-      {data?.length ? (
+      {data?.response.length ? (
         <StockIndexChart
-          symbolId={currentSymbol?._id ?? data[0]._id}
-          symbol={currentSymbol?.symbol ?? data[0].symbol}
+          symbolId={currentSymbol?.symbolId ?? data.response[0].symbolId}
+          symbol={currentSymbol?.symbol ?? data.response[0].symbol}
         />
       ) : null}
     </Flex>
