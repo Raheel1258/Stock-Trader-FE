@@ -17,7 +17,7 @@ const StockIndexCard = ({
   };
 
   const isPositiveChange = availableStock.priceChangePrevious > 0;
-  const symbol = isPositiveChange ? "+" : "-";
+  const symbol = isPositiveChange ? "+" : "";
 
   return (
     <Flex
