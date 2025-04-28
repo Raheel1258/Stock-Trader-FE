@@ -13,9 +13,9 @@ const StockIndexView = () => {
     queryKey: ["available-symbols"],
     queryFn: () => api.GET<AvailableStock[]>(api.GET_AVAILABLE_SYMBOLS),
   });
-  const [currentSymbol, setCurrentSymbol] = useState<string | undefined>(
-    undefined
-  );
+  const [currentSymbol, setCurrentSymbol] = useState<
+    AvailableStock | undefined
+  >(undefined);
 
   if (isLoading) {
     return (
@@ -26,8 +26,8 @@ const StockIndexView = () => {
   }
 
   return (
-    <Flex px="4" gap="4" direction='column' flexGrow='1'>
-      <Flex justify='center' gapY='4' gapX="8" wrap='wrap'>
+    <Flex px="4" gap="4" direction="column" flexGrow="1">
+      <Flex justify="center" gapY="4" gapX="8" wrap="wrap">
         {data?.map((availableStock) => (
           <StockIndexCard
             key={availableStock._id}
@@ -37,7 +37,10 @@ const StockIndexView = () => {
         )) ?? <Text>No stocks found</Text>}
       </Flex>
       {data?.length ? (
-        <StockIndexChart symbolId={currentSymbol ?? data[0].symbol} />
+        <StockIndexChart
+          symbolId={currentSymbol?._id ?? data[0]._id}
+          symbol={currentSymbol?.symbol ?? data[0].symbol}
+        />
       ) : null}
     </Flex>
   );
