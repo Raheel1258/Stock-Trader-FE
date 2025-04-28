@@ -17,4 +17,11 @@ const logout = () => {
   return signOut(auth);
 };
 
-export { register, login, logout };
+const getUserAuth = async () => {
+  const user = auth.currentUser;
+  if (!user) return "";
+  const token = await user.getIdToken();
+  return token;
+};
+
+export { register, login, logout, getUserAuth };
