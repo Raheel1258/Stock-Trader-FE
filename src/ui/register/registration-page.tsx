@@ -9,6 +9,7 @@ import { EmailInputField } from "./components";
 import { PasswordInputField } from "@/components/form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface InitValues {
   email: string;
@@ -53,6 +54,9 @@ const RegistrationPage = () => {
             Submit {isPending && <Spinner />}
           </Button>
           {isError && <Text color="tomato">Failed to register</Text>}
+          <Link href="/login" className="text-green-1">
+            Sign in
+          </Link>
         </Form>
       </Formik>
     </Flex>

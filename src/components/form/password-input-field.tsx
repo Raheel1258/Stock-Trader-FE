@@ -24,7 +24,7 @@ const PasswordShowHideSlot = ({
   return (
     <TextField.Slot side="right">
       <IconButton type="button" onClick={toggleVisibility}>
-        {type === "password" ? <EyeIcon /> : <EyeOff />}
+        {type === "password" ? <EyeOff /> : <EyeIcon />}
       </IconButton>
     </TextField.Slot>
   );
