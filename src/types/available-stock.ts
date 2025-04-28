@@ -6,7 +6,9 @@ interface AvailableStock {
 
 interface StockData {
   id: string;
-  date: string;
+  date: {
+    $date: string;
+  };
   open: number;
   high: number;
   low: number;
@@ -15,4 +17,20 @@ interface StockData {
   symbol: string;
 }
 
-export type { AvailableStock, StockData };
+interface TransformedStockData extends Omit<StockData, "date"> {
+  date: string;
+}
+
+interface StockDataResponse {
+  success: boolean;
+  response: {
+    historicalData: StockData[];
+  };
+}
+
+export type {
+  AvailableStock,
+  StockData,
+  TransformedStockData,
+  StockDataResponse,
+};

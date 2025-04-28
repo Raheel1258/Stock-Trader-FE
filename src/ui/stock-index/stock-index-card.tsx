@@ -9,12 +9,12 @@ const StockIndexCard = ({
   onSelect,
 }: {
   availableStock: AvailableStock;
-  onSelect?: (selection: string) => void;
+  onSelect?: (selection: AvailableStock) => void;
 }) => {
   const onCardSelect = () => {
-    onSelect?.(availableStock._id);
+    onSelect?.(availableStock);
   };
-
+  
   return (
     <Flex
       minWidth={"400px"}
